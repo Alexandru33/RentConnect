@@ -13,6 +13,7 @@ import com.rentconnect.demo.repository.ViewingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 
@@ -55,6 +56,7 @@ public class ViewingService {
     public String addViewing(ViewingDTO viewingDTO, Integer propertyId, String token) throws PropertyIdNotFoundException {
 
         User user = userRepository.findByEmail(jwtService.extractUsername(token)).orElseThrow();
+        System.out.println("User " +  jwtService.extractUsername(token));
         System.out.println("in service " + propertyId + " " + user.getId());
         Property property = propertyRepository.findById(propertyId).orElseThrow(PropertyIdNotFoundException::new);
         Viewing viewing = fromViewingDTO(viewingDTO);
